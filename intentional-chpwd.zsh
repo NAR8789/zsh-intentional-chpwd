@@ -1,10 +1,11 @@
 # meant to be sourced from .zshrc
 
-raw_chpwd_functions=("$chpwd_functions[@]")
+_raw_chpwd_functions=("$chpwd_functions[@]")
 
 _intentional_chpwd() {
   if [ "$ZSH_SUBSHELL" = 0 ]; then
-    for FN in $raw_chpwd_functions[@]; do
+    local FN
+    for FN in $_raw_chpwd_functions[@]; do
       "$FN"
     done
   fi
