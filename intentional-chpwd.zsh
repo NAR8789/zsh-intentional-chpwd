@@ -48,6 +48,7 @@ IntentionalChpwd__replaceExistingChpwd() {
 }
 
 IntentionalChpwd__softInstall() {
+  chpwd_functions=("${(@)chpwd_functions:#IntentionalChpwd__chpwd_run}")
   chpwd_functions+=(IntentionalChpwd__chpwd_run)
 }
 
