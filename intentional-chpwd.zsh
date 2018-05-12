@@ -28,6 +28,12 @@ IntentionalChpwd__runFunctions() {
   done
 }
 
+IntentionalChpwd__functions_dedupe() {
+  IntentionalChpwd__functions_onIncludingSubshellChange=("${(@u)IntentionalChpwd__functions_onIncludingSubshellChange}")
+  IntentionalChpwd__functions_onChange=("${(@u)IntentionalChpwd__functions_onChange}")
+  IntentionalChpwd__functions_onDedupedChange=("${(@u)IntentionalChpwd__functions_onDedupedChange}")
+}
+
 IntentionalChpwd__debugHooks() {
   IntentionalChpwd__debug_onDedupedChange()           { echo 'chpwd_dedupedChange' }
   IntentionalChpwd__debug_onChange()                  { echo 'chpwd_change' }
