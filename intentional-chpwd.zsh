@@ -7,16 +7,16 @@ IntentionalChpwd__init() {
 }
 
 IntentionalChpwd__chpwd_run() {
-  IntentionalChpwd__runFunctions ${(@)IntentionalChpwd__functions_onIncludingSubshellChange}
+  IntentionalChpwd__runFunctions ${(@)IntentionalChpwd__functions_onDiscardedChange}
 
   if [ "$ZSH_SUBSHELL" != 0 ]; then return; fi
 
-  IntentionalChpwd__runFunctions ${(@)IntentionalChpwd__functions_onChange}
+  IntentionalChpwd__runFunctions ${(@)IntentionalChpwd__functions_onTrivialChange}
 
   if [ "$(pwd)" = "$IntentionalChpwd__lastWorkingDir" ]; then return; fi
 
   IntentionalChpwd__lastWorkingDir="$(pwd)"
-  IntentionalChpwd__runFunctions ${(@)IntentionalChpwd__functions_onDedupedChange}
+  IntentionalChpwd__runFunctions ${(@)IntentionalChpwd__functions_onChange}
 }
 
 IntentionalChpwd__runFunctions() {
@@ -31,37 +31,37 @@ IntentionalChpwd__runFunctions() {
 
 IntentionalChpwd__ls() {
   echo "chpwd_functions: (${(j:, :)chpwd_functions})"
-  echo "functions_onIncludingSubshellChange: (${(j:, :)IntentionalChpwd__functions_onIncludingSubshellChange})"
+  echo "functions_onDiscardedChange: (${(j:, :)IntentionalChpwd__functions_onDiscardedChange})"
+  echo "functions_onTrivialChange: (${(j:, :)IntentionalChpwd__functions_onTrivialChange})"
   echo "functions_onChange: (${(j:, :)IntentionalChpwd__functions_onChange})"
-  echo "functions_onDedupedChange: (${(j:, :)IntentionalChpwd__functions_onDedupedChange})"
 }
 
 IntentionalChpwd__functions_dedupe() {
   chpwd_functions=("${(@u)chpwd_functions}")
-  IntentionalChpwd__functions_onIncludingSubshellChange=("${(@u)IntentionalChpwd__functions_onIncludingSubshellChange}")
+  IntentionalChpwd__functions_onDiscardedChange=("${(@u)IntentionalChpwd__functions_onDiscardedChange}")
+  IntentionalChpwd__functions_onTrivialChange=("${(@u)IntentionalChpwd__functions_onTrivialChange}")
   IntentionalChpwd__functions_onChange=("${(@u)IntentionalChpwd__functions_onChange}")
-  IntentionalChpwd__functions_onDedupedChange=("${(@u)IntentionalChpwd__functions_onDedupedChange}")
 }
 
 IntentionalChpwd__debugHooks() {
-  IntentionalChpwd__debug_onDedupedChange()           { echo 'chpwd_dedupedChange' }
-  IntentionalChpwd__debug_onChange()                  { echo 'chpwd_change' }
-  IntentionalChpwd__debug_onIncludingSubshellChange() { echo 'chpwd_includingSubshellChange'}
+  IntentionalChpwd__debug_onChange()          { echo 'chpwd_onChange' }
+  IntentionalChpwd__debug_onTrivialChange()   { echo 'chpwd_onTrivialChange' }
+  IntentionalChpwd__debug_onDiscardedChange() { echo 'chpwd_onDiscardedChange'}
 
-  IntentionalChpwd__functions_onDedupedChange=("${(@)IntentionalChpwd__functions_onDedupedChange:#IntentionalChpwd__debug_onDedupedChange}")
   IntentionalChpwd__functions_onChange=("${(@)IntentionalChpwd__functions_onChange:#IntentionalChpwd__debug_onChange}")
-  IntentionalChpwd__functions_onIncludingSubshellChange=("${(@)IntentionalChpwd__functions_onIncludingSubshellChange:#IntentionalChpwd__debug_onIncludingSubshellChange}")
+  IntentionalChpwd__functions_onTrivialChange=("${(@)IntentionalChpwd__functions_onTrivialChange:#IntentionalChpwd__debug_onTrivialChange}")
+  IntentionalChpwd__functions_onDiscardedChange=("${(@)IntentionalChpwd__functions_onDiscardedChange:#IntentionalChpwd__debug_onDiscardedChange}")
 
-  IntentionalChpwd__functions_onDedupedChange+=(IntentionalChpwd__debug_onDedupedChange)
   IntentionalChpwd__functions_onChange+=(IntentionalChpwd__debug_onChange)
-  IntentionalChpwd__functions_onIncludingSubshellChange+=(IntentionalChpwd__debug_onIncludingSubshellChange)
+  IntentionalChpwd__functions_onTrivialChange+=(IntentionalChpwd__debug_onTrivialChange)
+  IntentionalChpwd__functions_onDiscardedChange+=(IntentionalChpwd__debug_onDiscardedChange)
 }
 
 
 ### loader ###
 
 IntentionalChpwd__replaceExistingChpwd() {
-  IntentionalChpwd__functions_onDedupedChange+=("${(@)chpwd_functions:#IntentionalChpwd__chpwd_run}")
+  IntentionalChpwd__functions_onChange+=("${(@)chpwd_functions:#IntentionalChpwd__chpwd_run}")
   chpwd_functions=(IntentionalChpwd__chpwd_run)
 }
 
