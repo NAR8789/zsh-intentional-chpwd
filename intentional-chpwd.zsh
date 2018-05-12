@@ -31,9 +31,9 @@ IntentionalChpwd__runFunctions() {
 
 IntentionalChpwd__ls() {
   echo "chpwd_functions: (${(j:, :)chpwd_functions})"
-  echo "functions_onDiscardedChange: (${(j:, :)IntentionalChpwd__functions_onDiscardedChange})"
-  echo "functions_onTrivialChange: (${(j:, :)IntentionalChpwd__functions_onTrivialChange})"
-  echo "functions_onChange: (${(j:, :)IntentionalChpwd__functions_onChange})"
+  echo "onDiscardedChange: (${(j:, :)IntentionalChpwd__functions_onDiscardedChange})"
+  echo "onTrivialChange: (${(j:, :)IntentionalChpwd__functions_onTrivialChange})"
+  echo "onChange: (${(j:, :)IntentionalChpwd__functions_onChange})"
 }
 
 IntentionalChpwd__functions_dedupe() {
