@@ -35,6 +35,7 @@ IntentionalChpwd__runFunctions() {
 ### util ###
 
 IntentionalChpwd__functions_dedupe() {
+  chpwd_functions=("${(@u)chpwd_functions}")
   IntentionalChpwd__functions_onIncludingSubshellChange=("${(@u)IntentionalChpwd__functions_onIncludingSubshellChange}")
   IntentionalChpwd__functions_onChange=("${(@u)IntentionalChpwd__functions_onChange}")
   IntentionalChpwd__functions_onDedupedChange=("${(@u)IntentionalChpwd__functions_onDedupedChange}")
