@@ -15,7 +15,7 @@ IntentionalChpwd__chpwd_run() {
 
   IntentionalChpwd__runFunctions "${(@)IntentionalChpwd__functions_onChange}"
 
-  if [ "$(pwd)" = "$IntentionalChpwd_lastWorkingDir" ]; then return; fi
+  if [ "$(pwd)" = "$IntentionalChpwd__lastWorkingDir" ]; then return; fi
 
   IntentionalChpwd__lastWorkingDir="$(pwd)"
   IntentionalChpwd__runFunctions "${(@)IntentionalChpwd__functions_onDedupedChange}"
