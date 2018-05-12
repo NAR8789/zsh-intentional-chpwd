@@ -67,7 +67,14 @@ IntentionalChpwd__onLoad() {
       ;;
     manual)
       ;;
+    replace_existing)
+      IntentionalChpwd__replaceExistingChpwd
+      ;;
+    '')
+      IntentionalChpwd__replaceExistingChpwd
+      ;;
     *)
+      echo "WARN: invalid option IntentionalChpwd__option_install='$IntentionalChpwd__option_install'. Must be one of 'soft', 'manual', or 'replace_existing'. defaulting to 'replace_existing'"
       IntentionalChpwd__replaceExistingChpwd
       ;;
   esac
