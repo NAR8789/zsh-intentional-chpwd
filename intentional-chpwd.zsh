@@ -38,6 +38,8 @@ IntentionalChpwd__softInstall() {
 }
 
 IntentionalChpwd__onLoad() {
+  IntentionalChpwd__init
+
   case "$IntentionalChpwd__option_install" in
     soft)
       IntentionalChpwd__softInstall
