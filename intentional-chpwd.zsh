@@ -56,6 +56,10 @@ IntentionalChpwd__onLoad() {
     IntentionalChpwd__debug_onChange()                  { echo 'chpwd_change' }
     IntentionalChpwd__debug_onIncludingSubshellChange() { echo 'chpwd_includingSubshellChange'}
 
+    IntentionalChpwd__functions_onDedupedChange=("${(@)IntentionalChpwd__functions_onDedupedChange:#IntentionalChpwd__debug_onDedupedChange}")
+    IntentionalChpwd__functions_onChange=("${(@)IntentionalChpwd__functions_onChange:#IntentionalChpwd__debug_onChange}")
+    IntentionalChpwd__functions_onIncludingSubshellChange=("${(@)IntentionalChpwd__functions_onIncludingSubshellChange:#IntentionalChpwd__debug_onIncludingSubshellChange}")
+
     IntentionalChpwd__functions_onDedupedChange+=(IntentionalChpwd__debug_onDedupedChange)
     IntentionalChpwd__functions_onChange+=(IntentionalChpwd__debug_onChange)
     IntentionalChpwd__functions_onIncludingSubshellChange+=(IntentionalChpwd__debug_onIncludingSubshellChange)
