@@ -9,16 +9,16 @@ IntentionalChpwd__init() {
 }
 
 IntentionalChpwd__chpwd_run() {
-  IntentionalChpwd__runFunctions "${IntentionalChpwd__functions_onIncludingSubshellChange[@]}"
+  IntentionalChpwd__runFunctions "${(@)IntentionalChpwd__functions_onIncludingSubshellChange}"
 
   if [ "$ZSH_SUBSHELL" != 0 ]; then return; fi
 
-  IntentionalChpwd__runFunctions "${IntentionalChpwd__functions_onChange[@]}"
+  IntentionalChpwd__runFunctions "${(@)IntentionalChpwd__functions_onChange}"
 
   if [ "$(pwd)" = "$IntentionalChpwd_lastWorkingDir" ]; then return; fi
 
   IntentionalChpwd__lastWorkingDir="$(pwd)"
-  IntentionalChpwd__runFunctions "${IntentionalChpwd__functions_onDedupedChange[@]}"
+  IntentionalChpwd__runFunctions "${(@)IntentionalChpwd__functions_onDedupedChange}"
 }
 
 IntentionalChpwd__runFunctions() {
