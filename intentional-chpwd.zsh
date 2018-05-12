@@ -58,7 +58,7 @@ IntentionalChpwd__debugHooks() {
 ### loader ###
 
 IntentionalChpwd__replaceExistingChpwd() {
-  IntentionalChpwd__functions_onDedupedChange=("${(@)chpwd_functions:#IntentionalChpwd__chpwd_run}")
+  IntentionalChpwd__functions_onDedupedChange+=("${(@)chpwd_functions:#IntentionalChpwd__chpwd_run}")
   chpwd_functions=(IntentionalChpwd__chpwd_run)
 }
 
