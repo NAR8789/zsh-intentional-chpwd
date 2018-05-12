@@ -1,13 +1,30 @@
 # meant to be sourced from .zshrc
 
-_raw_chpwd_functions=("$chpwd_functions[@]")
+IntentionalChpwd__functions_onDedupedChange=()
+IntentionalChpwd__functions_onChange=()
+IntentionalChpwd__functions_onIncludingSubshellChange=()
 
-_intentional_chpwd() {
-  if [ "$ZSH_SUBSHELL" = 0 ]; then
-    local FN
-    for FN in "$_raw_chpwd_functions[@]"; do
-      "$FN"
-    done
-  fi
+IntentionalChpwd__lastWorkingDir="$(pwd)"
+
+IntentionalChpwd__runFunctions() {
+  local fn
+  for fn in "$@"; do
+    "$fn"
+  done
 }
-chpwd_functions=(_intentional_chpwd)
+
+IntentionalChpwd__chpwd_run() {
+  IntentionalChpwd__runFunctions "${IntentionalChpwd__functions_onIncludingSubshellChange[@]}"
+
+  if [ "$ZSH_SUBSHELL" != 0 ]; then return; fi
+
+  IntentionalChpwd__runFunctions "${IntentionalChpwd__functions_onChange[@]}"
+
+  if [ "$(pwd)" = "$IntentionalChpwd_lastWorkingDir" ]; then return; fi
+
+  IntentionalChpwd__lastWorkingDir="$(pwd)"
+  IntentionalChpwd__runFunctions "${IntentionalChpwd__functions_onDedupedChange[@]}"
+}
+
+IntentionalChpwd__functions_onDedupedChange=("${chpwd_functions[@]}")
+chpwd_functions=(IntentionalChpwd__chpwd_run)
