@@ -4,6 +4,9 @@
 # IntentionalChpwd__functions_onChange
 # IntentionalChpwd__functions_onIncludingSubshellChange
 
+
+### core ###
+
 IntentionalChpwd__init() {
   IntentionalChpwd__lastWorkingDir="$(pwd)"
 }
@@ -28,6 +31,9 @@ IntentionalChpwd__runFunctions() {
   done
 }
 
+
+### util ###
+
 IntentionalChpwd__functions_dedupe() {
   IntentionalChpwd__functions_onIncludingSubshellChange=("${(@u)IntentionalChpwd__functions_onIncludingSubshellChange}")
   IntentionalChpwd__functions_onChange=("${(@u)IntentionalChpwd__functions_onChange}")
@@ -47,6 +53,9 @@ IntentionalChpwd__debugHooks() {
   IntentionalChpwd__functions_onChange+=(IntentionalChpwd__debug_onChange)
   IntentionalChpwd__functions_onIncludingSubshellChange+=(IntentionalChpwd__debug_onIncludingSubshellChange)
 }
+
+
+### loader ###
 
 IntentionalChpwd__replaceExistingChpwd() {
   IntentionalChpwd__functions_onDedupedChange=("${(@)chpwd_functions:#IntentionalChpwd__chpwd_run}")
@@ -79,5 +88,7 @@ IntentionalChpwd__onLoad() {
       ;;
   esac
 }
+
+### load! ###
 
 IntentionalChpwd__onLoad
