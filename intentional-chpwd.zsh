@@ -1,10 +1,5 @@
 # meant to be sourced from .zshrc
 
-# IntentionalChpwd__functions_onDedupedChange
-# IntentionalChpwd__functions_onChange
-# IntentionalChpwd__functions_onIncludingSubshellChange
-
-
 ### core ###
 
 IntentionalChpwd__init() {
